@@ -1,10 +1,11 @@
-const { readFileSync, writeFileSync, readdirSync } = require('fs');
+const { readFileSync, writeFileSync, readdirSync, mkdirSync } = require('fs');
 const parseEmailContent = require('./Utils/parseEmailContent');
 const openEditor = require('./Utils/openEditor');
 const send_mail = require('./Utils/sendmail');
 const prompt = require('./Utils/input-operations');
 const assert = require('assert');
 
+const debug = true
 /**
  * --setup
  *      --smtp-host
@@ -32,11 +33,14 @@ const assert = require('assert');
  * */
 
 const config_file_path = './config.json';
+!readdirSync('./').includes( 'config.json' ) && writeFileSync('./config.json',JSON.stringify({}))
 const get_config = () => JSON.parse(readFileSync( config_file_path, {encoding:'utf-8'} ));
 const commit_config = ( new_config ) => writeFileSync( config_file_path, JSON.stringify(new_config, null, 4) );
 
 const drafts_path = './VOLUMES/Drafts/';
 const drafts_info_path = './VOLUMES/drafts.json';
+!readdirSync("./VOLUMES").includes("drafts.json")&&writeFileSync(drafts_info_path,JSON.stringify({drafts:[]}));
+!readdirSync("./VOLUMES").includes("Drafts")&&mkdirSync(drafts_path);
 const get_drafts_object = () => JSON.parse( readFileSync( drafts_info_path, {encoding:'utf-8'} ) ).drafts;
 const commit_drafts = ( updated_drafts ) => writeFileSync( drafts_info_path, JSON.stringify( {drafts:updated_drafts}, null, 4 ) );
 
@@ -360,7 +364,8 @@ const main = async() => {
         if( !func )
             await operation_mapping['--help']()
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
+        debug && console.error(error)
     }
 }
 main();
