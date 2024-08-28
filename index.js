@@ -1,4 +1,5 @@
 const { readFileSync, writeFileSync, readdirSync, mkdirSync } = require('fs');
+const { parse: parse_markdown_to_html } = require('marked');
 const parseEmailContent = require('./Utils/parseEmailContent');
 const openEditor = require('./Utils/openEditor');
 const send_mail = require('./Utils/sendmail');
@@ -182,11 +183,14 @@ const send_drafts = async(params)=>{
         "contact-phone" : phone,
         "contact-email" : email
     } = config;
+
+    const populate = parse_markdown_to_html( body )
+
     const html = 
     mail_template
         .split('[:mail_subject]').join( subject )
         .split("[:mail_reciver_name]").join(greet)
-        .split("[:populate]").join( body.split("\n").map( line => line ? `<p>${line}</p>`:`<br/>` ).join('') )
+        .split("[:populate]").join( populate )
         .split("[:mail_to_email]").join(email)
         .split("[:contact_phone]").join(phone);
     const arguments = {  ...details, host, port, secure, user, pass, subject, text: draft.split('\n').slice(1).join('\n'),html };

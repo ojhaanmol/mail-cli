@@ -1,6 +1,6 @@
 {
   "name": "mail-cli",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "marked": "^14.1.0",
     "nodemailer": "^6.9.14",
     "ps-list": "^8.1.1"
   }
