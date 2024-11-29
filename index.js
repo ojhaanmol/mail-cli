@@ -42,7 +42,7 @@ const commit_config = ( new_config ) => writeFileSync( config_file_path, JSON.st
 
 const drafts_path = './VOLUMES/Drafts/';
 const drafts_info_path = './VOLUMES/drafts.json';
-(!readdirSync('./').includes('./VOLUMES'))&&mkdirSync('./VOLUMES');
+(!readdirSync('./').includes('VOLUMES'))&&mkdirSync('./VOLUMES');
 !readdirSync("./VOLUMES").includes("drafts.json")&&writeFileSync(drafts_info_path,JSON.stringify({drafts:[]}));
 !readdirSync("./VOLUMES").includes("Drafts")&&mkdirSync(drafts_path);
 const get_drafts_object = () => JSON.parse( readFileSync( drafts_info_path, {encoding:'utf-8'} ) ).drafts;
