@@ -18,6 +18,16 @@ A command-line interface (CLI) tool for managing email drafts, configuring SMTP 
 
 To use this CLI tool, you must have Node.js installed. Clone the repository and install the dependencies.
 
+```
+npx mail-cli
+```
+
+For installation inside node_modules
+```
+npm i mail-cli
+```
+
+For cloneing and contribution
 ```bash
 git clone https://github.com/your-repo/mail-cli-tool.git
 cd mail-cli-tool
@@ -29,7 +39,7 @@ npm install
 Run the CLI tool using the following command:
 
 ```bash
-node index.js <command> [options]
+npx mail-cli <command> [options]
 ```
 
 ### Setup Commands
@@ -37,15 +47,15 @@ node index.js <command> [options]
 Configure the tool with your email settings and editor preferences.
 
 ```bash
-node index.js --setup --smtp-host <host>
-node index.js --setup --smtp-port <port>
-node index.js --setup --auth-user <username>
-node index.js --setup --auth-pass <password>
-node index.js --setup --set-secure
-node index.js --setup --set-unsecure
-node index.js --setup --set-editor <editor>
-node index.js --setup --view-config
-node index.js --setup --edit-config
+npx mail-cli --setup --smtp-host <host>
+npx mail-cli --setup --smtp-port <port>
+npx mail-cli --setup --auth-user <username>
+npx mail-cli --setup --auth-pass <password>
+npx mail-cli --setup --set-secure
+npx mail-cli --setup --set-unsecure
+npx mail-cli --setup --set-editor <editor>
+npx mail-cli --setup --view-config
+npx mail-cli --setup --edit-config
 
 ```
 
@@ -54,12 +64,12 @@ node index.js --setup --edit-config
 Manage your email drafts with the following commands:
 
 ```bash
-node index.js --draft --new [--tag <tagname>]
-node index.js --draft --get-draft-list
-node index.js --draft --get-draft <draft_id or tag_name>
-node index.js --draft --edit-draft --subject <draft_id or tag_name> <new_subject>
-node index.js --draft --edit-draft --body <draft_id or tag_name> <new_body>
-node index.js --draft --send [<draft_id or tag_name>]
+npx mail-cli --draft --new [--tag <tagname>]
+npx mail-cli --draft --get-draft-list
+npx mail-cli --draft --get-draft <draft_id or tag_name>
+npx mail-cli --draft --edit-draft --subject <draft_id or tag_name> <new_subject>
+npx mail-cli --draft --edit-draft --body <draft_id or tag_name> <new_body>
+npx mail-cli --draft --send [<draft_id or tag_name>]
 
 ```
 
