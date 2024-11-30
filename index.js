@@ -175,7 +175,7 @@ const send_drafts = async(params)=>{
     const config = get_config();
     const details = get_drafts_object().filter( draft => draft.filename.split('.')[0] === draft_id)[0];
     const draft = ''+readFileSync( drafts_path+details.filename );
-    const mail_template = ''+readFileSync( "./VOLUMES/mail.template.html" );
+    const mail_template = ''+readFileSync( path.join(__dirname,"/VOLUMES/mail.template.html") );
     const { subject, greet, body, footer } = parseEmailContent( draft );
     const {
         "smtp-host" : host,
