@@ -6,6 +6,7 @@ const parseEmailContent = require('./Utils/parseEmailContent');
 const openEditor = require('./Utils/openEditor');
 const send_mail = require('./Utils/sendmail');
 const prompt = require('./Utils/input-operations');
+const path= require('path')
 const assert = require('assert');
 
 const debug = true
@@ -40,11 +41,10 @@ const config_file_path = './config.json';
 const get_config = () => JSON.parse(readFileSync( config_file_path, {encoding:'utf-8'} ));
 const commit_config = ( new_config ) => writeFileSync( config_file_path, JSON.stringify(new_config, null, 4) );
 
-const drafts_path = './VOLUMES/Drafts/';
-const drafts_info_path = './VOLUMES/drafts.json';
-(!readdirSync('./').includes('VOLUMES'))&&mkdirSync('./VOLUMES');
-!readdirSync("./VOLUMES").includes("drafts.json")&&writeFileSync(drafts_info_path,JSON.stringify({drafts:[]}));
-!readdirSync("./VOLUMES").includes("Drafts")&&mkdirSync(drafts_path);
+const drafts_path = path.join(__dirname,'/VOLUMES/Drafts/');
+const drafts_info_path = path.join(__dirname, '/VOLUMES/drafts.json');
+!readdirSync(path.join(__dirname,"VOLUMES")).includes("drafts.json")&&writeFileSync(drafts_info_path,JSON.stringify({drafts:[]}));
+!readdirSync(path.join(__dirname,"VOLUMES")).includes("Drafts")&&mkdirSync(drafts_path);
 const get_drafts_object = () => JSON.parse( readFileSync( drafts_info_path, {encoding:'utf-8'} ) ).drafts;
 const commit_drafts = ( updated_drafts ) => writeFileSync( drafts_info_path, JSON.stringify( {drafts:updated_drafts}, null, 4 ) );
 
