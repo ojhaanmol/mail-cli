@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 const assert = require('assert');
 
-function openEditor({editor, file}) {
+function openEditor({editor='nano', file}) {
     assert(!editor || ['nano','vi','code'].includes(editor), `unknown editor ${editor}.\nDefault editor nano`)
     return new Promise((resolve, reject) => {
         const editorProcess = spawn(editor, [file], { stdio: 'inherit' });
